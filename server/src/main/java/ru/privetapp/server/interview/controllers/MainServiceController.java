@@ -1,7 +1,5 @@
 package ru.privetapp.server.interview.controllers;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +14,7 @@ public class MainServiceController {
 	@Autowired private IMainService personService;
 
 	@RequestMapping("/login")
-	public UUID login(@RequestParam(value = "email", required = true) String email, @RequestParam(value = "password", required = true) String password) {
+	public String login(@RequestParam(value = "email", required = true) String email, @RequestParam(value = "password", required = true) String password) {
 		return personService.login(email, password);
 	}
 
