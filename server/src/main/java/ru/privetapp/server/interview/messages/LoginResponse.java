@@ -2,7 +2,7 @@ package ru.privetapp.server.interview.messages;
 
 import java.util.UUID;
 
-public class LoginResponse extends BaseResponse {
+public class LoginResponse implements IResponseData {
 	private UUID sessionId;
 
 	public UUID getSessionId() {

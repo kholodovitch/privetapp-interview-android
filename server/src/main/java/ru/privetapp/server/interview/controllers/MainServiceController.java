@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.privetapp.server.interview.component.IMainService;
+import ru.privetapp.server.interview.messages.DataResponse;
 import ru.privetapp.server.interview.messages.LoginResponse;
 
 @RestController
@@ -15,10 +16,10 @@ public class MainServiceController {
 	@Autowired private IMainService personService;
 
 	@RequestMapping("/login")
-	public LoginResponse login(@RequestParam(value = "email", required = true) String email, @RequestParam(value = "password", required = true) String password) {
+	public DataResponse<LoginResponse> login(@RequestParam(value = "email", required = true) String email, @RequestParam(value = "password", required = true) String password) {
 		LoginResponse loginResponse = new LoginResponse();
 		loginResponse.setSessionId(personService.login(email, password));
-		return loginResponse;
+		return new DataResponse<LoginResponse>(loginResponse);
 	}
 
 }

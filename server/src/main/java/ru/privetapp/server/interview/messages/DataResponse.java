@@ -5,12 +5,18 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import ru.privetapp.server.interview.types.ResponseStatus;
 
-public class BaseResponse {
+public class DataResponse<T extends IResponseData> {
 	private ResponseStatus status;
 	@JsonInclude(Include.NON_NULL) private String description;
+	private T data;
 
-	public BaseResponse() {
+	public DataResponse() {
 		status = ResponseStatus.ok;
+	}
+
+	public DataResponse(T data) {
+		this();
+		this.data = data; 
 	}
 
 	public ResponseStatus getStatus() {
@@ -27,5 +33,13 @@ public class BaseResponse {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
 	}
 }
