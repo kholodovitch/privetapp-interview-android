@@ -1,5 +1,7 @@
 package ru.privetapp.server.interview.component;
 
+import java.util.UUID;
+
 public interface IMainService {
-	public String login(String email, String password);
+	public UUID login(String email, String password);
 }
