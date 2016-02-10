@@ -8,7 +8,6 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/interview" />
 		<property name="username" value="root" />
-		<property name="password" value="password" />
 	</bean>
 
 	<bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

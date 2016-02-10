@@ -30,6 +30,8 @@ public class MainService implements IMainService {
 			for (Friend p : list) {
 				ListItems item = new ListItems();
 				item.setId(UUID.fromString(p.getUuid()));
+				item.setTitle(p.getTitle());
+				item.setUrl(p.getUrl());
 				result.add(item);
 			}
 			return result.toArray(new ListItems[0]);
