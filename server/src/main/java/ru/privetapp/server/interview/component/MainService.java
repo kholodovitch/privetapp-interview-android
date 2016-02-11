@@ -12,6 +12,7 @@ import ru.privetapp.server.interview.dao.SessionInfoDAO;
 import ru.privetapp.server.interview.dao.UserDAO;
 import ru.privetapp.server.interview.exceptions.AuthorizationException;
 import ru.privetapp.server.interview.exceptions.InterviewServiceException;
+import ru.privetapp.server.interview.exceptions.SessionExpiredException;
 import ru.privetapp.server.interview.exceptions.SessionNotFoundException;
 import ru.privetapp.server.interview.models.Friend;
 import ru.privetapp.server.interview.models.SessionInfo;

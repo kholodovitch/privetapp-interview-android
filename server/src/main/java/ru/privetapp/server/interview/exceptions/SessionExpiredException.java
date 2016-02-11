@@ -1,6 +1,5 @@
-package ru.privetapp.server.interview.component;
+package ru.privetapp.server.interview.exceptions;
 
-import ru.privetapp.server.interview.exceptions.InterviewServiceException;
 
 public class SessionExpiredException extends InterviewServiceException {
 
