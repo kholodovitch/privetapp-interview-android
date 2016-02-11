@@ -41,7 +41,7 @@ public class SessionInfoDAOImpl implements SessionInfoDAO {
 		} catch (HibernateException e) {
 			if (tx != null)
 				tx.rollback();
-			throw new InterviewServiceException(e);
+			throw new InterviewServiceException("Error on registering new session", e);
 		} finally {
 			session.close();
 		}
