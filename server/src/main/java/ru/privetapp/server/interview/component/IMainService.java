@@ -8,5 +8,5 @@ import ru.privetapp.server.interview.types.ListItems;
 public interface IMainService {
 	public UUID login(String email, String password) throws InterviewServiceException;
 
-	public ListItems[] list(String sessionId, Integer offset, Integer count);
+	public ListItems[] list(String sessionId, Integer offset, Integer count) throws InterviewServiceException;
 }

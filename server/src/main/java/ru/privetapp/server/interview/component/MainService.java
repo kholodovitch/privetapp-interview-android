@@ -12,6 +12,7 @@ import ru.privetapp.server.interview.dao.SessionInfoDAO;
 import ru.privetapp.server.interview.dao.UserDAO;
 import ru.privetapp.server.interview.exceptions.AuthorizationException;
 import ru.privetapp.server.interview.exceptions.InterviewServiceException;
+import ru.privetapp.server.interview.exceptions.SessionNotFoundException;
 import ru.privetapp.server.interview.models.Friend;
 import ru.privetapp.server.interview.models.SessionInfo;
 import ru.privetapp.server.interview.models.User;
@@ -43,10 +44,17 @@ public class MainService implements IMainService {
 	}
 
 	@Override
-	public ListItems[] list(String sessionId, Integer offset, Integer count) {
+	public ListItems[] list(String sessionId, Integer offset, Integer count) throws InterviewServiceException {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 
 		try {
+			SessionInfoDAO sessionDAO = context.getBean(SessionInfoDAO.class);
+			SessionInfo sessionInfo = sessionDAO.get(UUID.fromString(sessionId));
+			if (sessionInfo == null)
+				throw new SessionNotFoundException();
+			if (!sessionInfo.isActive())
+				throw new SessionExpiredException();
+
 			FriendDAO friendDAO = context.getBean(FriendDAO.class);
 			List<Friend> list = friendDAO.list(offset, count);
 			List<ListItems> result = new ArrayList<ListItems>(list.size());

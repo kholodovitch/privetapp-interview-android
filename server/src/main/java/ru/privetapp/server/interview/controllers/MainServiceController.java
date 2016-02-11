@@ -25,7 +25,7 @@ public class MainServiceController {
 	}
 
 	@RequestMapping("/list")
-	public DataResponse<ListResponse> list(@RequestParam(value = "session", required = true) String sessionId, @RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "count", required = false) Integer count) {
+	public DataResponse<ListResponse> list(@RequestParam(value = "session", required = true) String sessionId, @RequestParam(value = "offset", required = false) Integer offset, @RequestParam(value = "count", required = false) Integer count) throws InterviewServiceException {
 		ListResponse listResponse = new ListResponse();
 		listResponse.setItems(personService.list(sessionId, offset, count));
 		return new DataResponse<ListResponse>(listResponse);

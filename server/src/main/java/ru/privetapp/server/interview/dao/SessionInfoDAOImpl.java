@@ -33,6 +33,7 @@ public class SessionInfoDAOImpl implements SessionInfoDAO {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = null;
 		UUID newSessionId = null;
+
 		try {
 			tx = session.beginTransaction();
 			newSessionId = UUID.fromString((String) session.save(newSession));
