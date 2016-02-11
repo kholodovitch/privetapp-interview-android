@@ -2,6 +2,7 @@ package ru.privetapp.server.interview.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,13 +18,18 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Friend> list() {
+	public List<Friend> list(Integer offset, Integer count) {
 		Session session = this.sessionFactory.openSession();
 		try {
-			return session.createCriteria(Friend.class).setReadOnly(true).list();
+			Criteria criteria = session.createCriteria(Friend.class);
+			if (offset != null)
+				criteria.setFirstResult(offset);
+			if (count != null)
+				criteria.setMaxResults(count);
+
+			return criteria.setReadOnly(true).list();
 		} finally {
 			session.close();
 		}
 	}
-
 }

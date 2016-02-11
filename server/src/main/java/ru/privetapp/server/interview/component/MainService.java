@@ -24,7 +24,7 @@ public class MainService implements IMainService {
 
 		try {
 			FriendDAO personDAO = context.getBean(FriendDAO.class);
-			List<Friend> list = personDAO.list();
+			List<Friend> list = personDAO.list(offset, count);
 			List<ListItems> result = new ArrayList<ListItems>(list.size());
 
 			for (Friend p : list) {

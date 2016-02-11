@@ -6,6 +6,6 @@ import ru.privetapp.server.interview.models.Friend;
 
 public interface FriendDAO {
 
-	public List<Friend> list();
+	public List<Friend> list(Integer offset, Integer count);
 
 }
