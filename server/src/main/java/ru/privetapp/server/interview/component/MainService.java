@@ -8,10 +8,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import ru.privetapp.server.interview.dao.FriendDAO;
+import ru.privetapp.server.interview.dao.SessionInfoDAO;
 import ru.privetapp.server.interview.dao.UserDAO;
 import ru.privetapp.server.interview.exceptions.AuthorizationException;
 import ru.privetapp.server.interview.exceptions.InterviewServiceException;
 import ru.privetapp.server.interview.models.Friend;
+import ru.privetapp.server.interview.models.SessionInfo;
 import ru.privetapp.server.interview.models.User;
 import ru.privetapp.server.interview.types.ListItems;
 
@@ -23,11 +25,18 @@ public class MainService implements IMainService {
 
 		try {
 			UserDAO userDAO = context.getBean(UserDAO.class);
+			SessionInfoDAO sessionDAO = context.getBean(SessionInfoDAO.class);
 			User user = userDAO.get(email, password);
 			if (user == null)
 				throw new AuthorizationException();
 
-			return UUID.randomUUID();
+			SessionInfo newSessionInfo = new SessionInfo();
+			newSessionInfo.setUuid(UUID.randomUUID().toString());
+			newSessionInfo.setUserId(user.getUuid());
+			newSessionInfo.setActive(true);
+
+			sessionDAO.deactivateByUser(UUID.fromString(user.getUuid()));
+			return sessionDAO.add(newSessionInfo);
 		} finally {
 			context.close();
 		}
