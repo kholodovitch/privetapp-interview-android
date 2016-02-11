@@ -39,10 +39,18 @@ public class MainServiceController {
 	}
 
 	@ExceptionHandler(InterviewServiceException.class)
-	public ResponseEntity<DataResponse<IResponseData>> rulesForCustomerNotFound(HttpServletRequest req, InterviewServiceException e) {
+	public ResponseEntity<DataResponse<IResponseData>> rulesForInterviewServiceException(HttpServletRequest req, InterviewServiceException e) {
 		DataResponse<IResponseData> error = new DataResponse<IResponseData>();
 		error.setStatus(ResponseStatus.error);
 		error.setDescription(e.getMessage());
-		return new ResponseEntity<DataResponse<IResponseData>>(error, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<DataResponse<IResponseData>>(error, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<DataResponse<IResponseData>> rulesForException(HttpServletRequest req, Exception e) {
+		DataResponse<IResponseData> error = new DataResponse<IResponseData>();
+		error.setStatus(ResponseStatus.error);
+		error.setDescription(e.getClass().getSimpleName() + ": \"" + e.getMessage() + "\"");
+		return new ResponseEntity<DataResponse<IResponseData>>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
